@@ -9,4 +9,3 @@ if ping == 0:
 	print("last status is OK {0}\n".format(now))
 else:
 	print("last status is FAILD {0}\n".format(now))
-		ilya@ilya-docker:~$
