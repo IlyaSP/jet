@@ -1,0 +1,32 @@
+// Powered by Infostretch 
+
+timestamps {
+
+node () {
+
+	stage ('app_to_docker - Checkout') {
+ 	 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/IlyaSP/jet.git']]]) 
+	}
+	stage ('app_to_docker - Build') {
+ 			// Shell build step
+sh """ 
+echo "=============START Test==========="
+ls -la
+pwd
+
+result=`python3 ping.py | grep last | wc -l`
+echo $result
+if [ $result = 1 ]
+then
+	echo "test pass"
+else
+	echo "test failed"
+    exit 1
+fi
+
+echo "========test fin==========" 
+ """
+// Unable to convert a build step referring to "com.nirima.jenkins.plugins.docker.builder.DockerBuilderPublisher". Please verify and convert manually if required. 
+	}
+}
+}
